@@ -1,0 +1,72 @@
+{
+    "place": {
+        "url": "for=place:*&in=state:{state}",
+        "geog_in": [
+            {
+                "geog": "detroit",
+                "url_params": {
+                    "state": 26
+                },
+                "file": "geogs/census/detroit/places.csv"
+            }
+        ]
+    },
+    "tract": {
+        "url": "for=tract:*&in=state:{state}+county:{county}",
+        "geog_in": [
+            {
+                "geog": "detroit",
+                "url_params": {
+                    "state": 26,
+                    "county": 163
+                },
+                "file": "geogs/census/detroit/tracts.csv"
+            },
+            {
+                "geog": "custom_example",
+                "url_params": {
+                    "state": 26,
+                    "county": 163
+                },
+                "file": "geogs/census/custom_example/tracts.csv"
+            }
+        ]
+    },
+    "bg": {
+        "url": "for=block%20group:*&in=state:{state}+county:{county}+tract:*",
+        "geog_in": [
+            {
+                "geog": "detroit",
+                "url_params": {
+                    "state": 26,
+                    "county": 163
+                },
+                "file": "geogs/census/detroit/bg.csv"
+            },
+            {
+                "geog": "custom_example",
+                "url_params": {
+                    "state": 26,
+                    "county": 163
+                },
+                "file": "geogs/census/custom_example/bg.csv"
+            }
+        ]
+    },
+    "zcta": {
+        "url": "for=zip%20code%20tabulation%20area:*",
+        "geog_in": [
+            {
+                "geog": "detroit",
+                "file": "geogs/census/detroit/zctas.csv"
+            }
+        ]
+    },
+    "custom_tract": {
+        "level": "tract",
+        "geog_in": "detroit",
+        "file": "geogs/apportionment/your_csv_here.csv",
+        "groupby": "geog_id",
+        "geog_type_field": "geog_type"
+    }
+}
