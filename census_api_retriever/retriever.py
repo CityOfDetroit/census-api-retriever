@@ -71,7 +71,7 @@ def generate_geoids(df: pd.DataFrame, geography: str) -> pd.Series:
 
 
 class CensusAPIRetriever:
-    def __init__(self, request_config_path: str, geography_config_path='configs/setup/geographies.json', field_output_types = 'EM', calc_columns_only = False):
+    def __init__(self, request_config_path: str, geography_config_path='configs/setup/geographies.json', field_output_types='EM', calc_columns_only=False, api_key=None ):
         """
         Class to get census data using the Census Data Config setup.
 
@@ -79,13 +79,15 @@ class CensusAPIRetriever:
             request_config_path (str): Path to request config json
             geography_config_path (str, optional): Path to geography config json. Defaults to 'configs/setup/geographies.json'.
             field_output_types (str, optional): field_output_types options: e|m|both; Defaults to 'both'.
-            calc_columns_only (bool, optional): if true will keep only custom calc columns from the config
+            calc_columns_only (bool, optional): if true will keep only custom calc columns from the config,
+            api_key (str, optional): Census API key. Sign up for one here: https://api.census.gov/data/key_signup.html
         """
         self.request_config_path = request_config_path
         self.geography_config_path = geography_config_path
         self.field_output_types = field_output_types
         self.calc_columns_only = calc_columns_only
         self.geography_index = 0
+        self.api_key = api_key
 
     # Configs
 
@@ -239,7 +241,7 @@ class CensusAPIRetriever:
             field_list_str = ','.join(field_list)
             src = self._get_field_item_src(field_item)
             if src["src"] == 'acs':
-                yield f"https://api.census.gov/data/{src['config']['year']}/acs/acs{src['config']['version']}?get={field_list_str}{self._make_param()}"
+                yield f"https://api.census.gov/data/{src['config']['year']}/acs/acs{src['config']['version']}?get={field_list_str}{self._make_param()}&key={self.api_key}"
         
     def _get_and_load_data(self):
         """

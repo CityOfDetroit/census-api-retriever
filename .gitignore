@@ -208,3 +208,13 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Custom
+configs/*
+*.ipynb
+!sample.ipynb
+outputs/*.csv
+!sample_detroit_census_tract.csv
+
+
+
